@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                order_automation_rule_listing.order_automation_rule_listing_data_source
+            </item>
+            <item name="deps" xsi:type="string">
+                order_automation_rule_listing.order_automation_rule_listing_data_source
+            </item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add New</label>
+            </button>
+        </buttons>
+        <spinner>order_automation_rule_listing_columns</spinner>
+        <deps>
+            <dep>order_automation_rule_listing.order_automation_rule_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="order_automation_rule_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">rule_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Niktar_Rule::management</aclResource>
+        <dataProvider class="Niktar\Rule\Ui\DataProvider\RuleDataProvider"
+                      name="order_automation_rule_listing_data_source">
+            <settings>
+                <requestFieldName>rule_id</requestFieldName>
+                <primaryFieldName>rule_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="order_automation_rule_listing_columns">
+        <column name="rule_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="payment_method">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Payment Method</label>
+            </settings>
+        </column>
+        <column name="apply_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Apply Id</label>
+            </settings>
+        </column>
+        <column name="order_status">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Order Status</label>
+            </settings>
+        </column>
+        <column name="action_type">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Action Type</label>
+            </settings>
+        </column>
+        <column name="action_data">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Action Data</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Niktar\Rule\Ui\Component\Listing\Column\RuleBlockActions">
+            <settings>
+                <indexField>rule_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

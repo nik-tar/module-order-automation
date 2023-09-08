@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">order_automation_rule_form.order_automation_rule_form_data_source
+            </item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Order Automation Rule Form</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <namespace>order_automation_rule_form</namespace>
+        <dataScope>data.general</dataScope>
+        <deps>
+            <dep>order_automation_rule_form.order_automation_rule_form_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="save" class="Niktar\OrderAutomation\Block\Form\Rule\Save"/>
+            <button name="back" class="Niktar\OrderAutomation\Block\Form\Rule\Back"/>
+            <button name="delete" class="Niktar\OrderAutomation\Block\Form\Rule\Delete"/>
+        </buttons>
+    </settings>
+    <dataSource name="order_automation_rule_form_data_source" component="Magento_Ui/js/form/provider">
+        <settings>
+            <submitUrl path="automation_rule/rule/save"/>
+        </settings>
+        <dataProvider class="Niktar\OrderAutomation\Ui\DataProvider\RuleDataProvider"
+                      name="order_automation_rule_form_data_source">
+            <settings>
+                <requestFieldName>rule_id</requestFieldName>
+                <primaryFieldName>rule_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <label translate="true">General</label>
+        </settings>
+        <field name="rule_id" sortOrder="0" formElement="hidden">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">rule_id</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Entity ID</label>
+                <dataScope>rule_id</dataScope>
+            </settings>
+        </field>
+        <field name="rule_id" sortOrder="00" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">rule_id</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>int</dataType>
+                <label translate="true">Rule Id</label>
+                <dataScope>rule_id</dataScope>
+            </settings>
+        </field>
+        <field name="payment_method" sortOrder="10" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">payment_method</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Payment Method</label>
+                <dataScope>payment_method</dataScope>
+            </settings>
+        </field>
+        <field name="apply_id" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">apply_id</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>int</dataType>
+                <label translate="true">Apply Id</label>
+                <dataScope>apply_id</dataScope>
+            </settings>
+        </field>
+        <field name="order_status" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">order_status</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Order Status</label>
+                <dataScope>order_status</dataScope>
+            </settings>
+        </field>
+        <field name="action_type" sortOrder="40" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">action_type</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>int</dataType>
+                <label translate="true">Action Type</label>
+                <dataScope>action_type</dataScope>
+            </settings>
+        </field>
+        <field name="action_data" sortOrder="50" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">action_data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Action Data</label>
+                <dataScope>action_data</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+</form>

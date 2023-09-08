@@ -1,0 +1,34 @@
+{
+  "order_automation_rule": {
+    "column": {
+      "rule_id": true,
+      "payment_method": true,
+      "apply_in": true,
+      "order_status": true,
+      "action_type": true,
+      "action_data": true
+    },
+    "index": {
+      "ORDER_AUTOMATION_RULE_RULE_ID": true
+    },
+    "constraint": {
+      "PRIMARY": true
+    }
+  },
+  "order_automation_action_log": {
+    "column": {
+      "action_id": true,
+      "order_id": true,
+      "rule_id": true,
+      "status": true,
+      "message": true,
+      "created_at": true
+    },
+    "index": {
+      "ORDER_AUTOMATION_ACTION_LOG_ACTION_ID": true
+    },
+    "constraint": {
+      "PRIMARY": true
+    }
+  }
+}

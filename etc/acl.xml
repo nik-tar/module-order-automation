@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Niktar_OrderAutomation::general" title="Order Automation" translate="title" sortOrder="10" >
+                    <resource id="Niktar_OrderAutomation::rules" title="Rules" translate="title" sortOrder="10" />
+                    <resource id="Niktar_OrderAutomation::log" title="Log" translate="title" sortOrder="20" />
+                    <resource id="Niktar_OrderAutomation::config" title="Config" translate="title" sortOrder="30" />
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

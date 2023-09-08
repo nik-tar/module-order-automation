@@ -1,0 +1,24 @@
+{
+  "name": "nik-tar/module-order-automation",
+  "version": "1.0.0",
+  "description": "The extension goal is to reduce workload for web store administrators responsible for processing orders.",
+  "type": "magento2-module",
+  "require": {
+    "php": ">=8.1",
+    "magento/framework": "*",
+    "magento/module-backend": "102.0.*",
+    "magento/module-email": "101.1.*",
+    "magento/module-sales": "103.0.*"
+  },
+  "license": [
+    "Proprietary"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Niktar\\OrderAutomation\\": ""
+    }
+  }
+}

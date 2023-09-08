@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Niktar_OrderAutomation::rules" sortOrder="100" title="Order Automation Rule Management"
+             module="Niktar_OrderAutomation" parent="Magento_Sales::sales" resource="Niktar_OrderAutomation::rules"
+             translate="title" action="automation_rule/rule/index"/>
+    </menu>
+</config>
