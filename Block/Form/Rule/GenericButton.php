@@ -5,7 +5,6 @@ namespace Niktar\OrderAutomation\Block\Form\Rule;
 use Magento\Backend\Block\Widget\Context;
 use Magento\Framework\UrlInterface;
 use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface;
-use Niktar\Rule\Api\Data\RuleInterface;
 
 /**
  * Generic (form) button for Rule entity.

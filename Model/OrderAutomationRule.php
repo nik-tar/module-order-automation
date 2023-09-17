@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Niktar\OrderAutomation\Model;
 
 use Magento\Framework\Model\AbstractExtensibleModel;
+use Niktar\OrderAutomation\Api\Data\ActionDataInterface;
 use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface;
 
 class OrderAutomationRule extends AbstractExtensibleModel implements OrderAutomationRuleInterface
@@ -91,23 +92,7 @@ class OrderAutomationRule extends AbstractExtensibleModel implements OrderAutoma
     /**
      * @inheritDoc
      */
-    public function getActionType(): int
-    {
-        return (int)$this->getData(self::ACTION_TYPE);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setActionType(int $actionType): void
-    {
-        $this->setData(self::ACTION_TYPE, $actionType);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getActionData(): string
+    public function getActionData(): ActionDataInterface
     {
         return $this->getData(self::ACTION_DATA);
     }
@@ -115,7 +100,7 @@ class OrderAutomationRule extends AbstractExtensibleModel implements OrderAutoma
     /**
      * @inheritDoc
      */
-    public function setActionData(string $actionData): void
+    public function setActionData(ActionDataInterface $actionData): void
     {
         $this->setData(self::ACTION_DATA, $actionData);
     }

@@ -7,6 +7,13 @@ use Niktar\OrderAutomation\Api\Data\ActionDataInterface;
 
 class ActionData extends AbstractExtensibleObject implements ActionDataInterface
 {
+    /**
+     * @inheritDoc
+     */
+    public function getActionType(): int
+    {
+        return $this->_get(self::ACTION_TYPE);
+    }
 
     /**
      * @inheritDoc
@@ -46,6 +53,14 @@ class ActionData extends AbstractExtensibleObject implements ActionDataInterface
     public function getIsCustomerNotified(): ?bool
     {
         return $this->_get(self::IS_CUSTOMER_NOTIFIED);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setActionType(int $actionType): void
+    {
+        $this->setData(self::ACTION_TYPE, $actionType);
     }
 
     /**

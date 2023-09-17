@@ -32,7 +32,7 @@
             <updateUrl path="mui/index/render"/>
         </settings>
         <aclResource>Niktar_Rule::management</aclResource>
-        <dataProvider class="Niktar\Rule\Ui\DataProvider\RuleDataProvider"
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider"
                       name="order_automation_rule_listing_data_source">
             <settings>
                 <requestFieldName>rule_id</requestFieldName>
@@ -61,10 +61,10 @@
                 <label translate="true">Payment Method</label>
             </settings>
         </column>
-        <column name="apply_id">
+        <column name="apply_in">
             <settings>
                 <filter>textRange</filter>
-                <label translate="true">Apply Id</label>
+                <label translate="true">Apply In</label>
             </settings>
         </column>
         <column name="order_status">
@@ -73,19 +73,13 @@
                 <label translate="true">Order Status</label>
             </settings>
         </column>
-        <column name="action_type">
-            <settings>
-                <filter>textRange</filter>
-                <label translate="true">Action Type</label>
-            </settings>
-        </column>
         <column name="action_data">
             <settings>
                 <filter>text</filter>
                 <label translate="true">Action Data</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="Niktar\Rule\Ui\Component\Listing\Column\RuleBlockActions">
+        <actionsColumn name="actions" class="Niktar\OrderAutomation\Ui\Component\Listing\Column\RuleBlockActions">
             <settings>
                 <indexField>rule_id</indexField>
             </settings>

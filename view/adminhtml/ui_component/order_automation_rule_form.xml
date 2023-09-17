@@ -11,7 +11,7 @@
     </argument>
     <settings>
         <namespace>order_automation_rule_form</namespace>
-        <dataScope>data.general</dataScope>
+        <dataScope>data</dataScope>
         <deps>
             <dep>order_automation_rule_form.order_automation_rule_form_data_source</dep>
         </deps>
@@ -49,43 +49,47 @@
                 <dataScope>rule_id</dataScope>
             </settings>
         </field>
-        <field name="rule_id" sortOrder="00" formElement="input">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">rule_id</item>
-                </item>
-            </argument>
-            <settings>
-                <dataType>int</dataType>
-                <label translate="true">Rule Id</label>
-                <dataScope>rule_id</dataScope>
-            </settings>
-        </field>
-        <field name="payment_method" sortOrder="10" formElement="input">
+        <field name="payment_method" sortOrder="10" formElement="select">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">payment_method</item>
                 </item>
             </argument>
             <settings>
-                <dataType>string</dataType>
+                <dataType>text</dataType>
                 <label translate="true">Payment Method</label>
                 <dataScope>payment_method</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
             </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <caption translate="true">-- Please Select --</caption>
+                        <options class="Magento\Payment\Ui\Component\Listing\Column\Method\Options"/>
+                    </settings>
+                </select>
+            </formElements>
         </field>
-        <field name="apply_id" sortOrder="20" formElement="input">
+        <field name="apply_in" sortOrder="20" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">apply_id</item>
+                    <item name="source" xsi:type="string">apply_in</item>
                 </item>
             </argument>
             <settings>
                 <dataType>int</dataType>
-                <label translate="true">Apply Id</label>
-                <dataScope>apply_id</dataScope>
+                <label translate="true">Apply In</label>
+                <dataScope>apply_in</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
             </settings>
         </field>
-        <field name="order_status" sortOrder="30" formElement="input">
+        <field name="order_status" sortOrder="30" formElement="select">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">order_status</item>
@@ -95,9 +99,20 @@
                 <dataType>string</dataType>
                 <label translate="true">Order Status</label>
                 <dataScope>order_status</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
             </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <caption translate="true">-- Please Select --</caption>
+                        <options class="Magento\Sales\Model\Config\Source\Order\Status"/>
+                    </settings>
+                </select>
+            </formElements>
         </field>
-        <field name="action_type" sortOrder="40" formElement="input">
+        <field name="action_type" sortOrder="40" formElement="select">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">action_type</item>
@@ -107,19 +122,122 @@
                 <dataType>int</dataType>
                 <label translate="true">Action Type</label>
                 <dataScope>action_type</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
             </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <caption translate="true">-- Please Select --</caption>
+                        <options class="Niktar\OrderAutomation\Ui\Source\ActionType"/>
+                    </settings>
+                </select>
+            </formElements>
         </field>
-        <field name="action_data" sortOrder="50" formElement="input">
+        <field name="email_template" sortOrder="50" formElement="select">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">action_data</item>
+                    <item name="source" xsi:type="string">email_template</item>
                 </item>
             </argument>
             <settings>
-                <dataType>string</dataType>
-                <label translate="true">Action Data</label>
-                <dataScope>action_data</dataScope>
+                <dataType>text</dataType>
+                <label translate="true">Email Template</label>
+                <dataScope>email_template</dataScope>
             </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <caption translate="true">-- Please Select --</caption>
+                        <options class="Magento\Config\Model\Config\Source\Email\Template"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="new_order_status" sortOrder="60" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">new_order_status</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">New Order Status</label>
+                <dataScope>new_order_status</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <caption translate="true">-- Please Select --</caption>
+                        <options class="Niktar\OrderAutomation\Ui\Source\OrderStatus"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="comment_text" sortOrder="70" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">comment_text</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Comment Text</label>
+                <dataScope>comment_text</dataScope>
+            </settings>
+        </field>
+        <field name="is_comment_visible_on_front"
+               formElement="checkbox"
+               component="Niktar_OrderAutomation/js/form/element/single-checkbox"
+               sortOrder="80">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">is_comment_visible_on_front</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Is Comment Visible On Front</label>
+                <dataScope>is_comment_visible_on_front</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="boolean">false</map>
+                            <map name="true" xsi:type="boolean">true</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="is_customer_notified"
+               formElement="checkbox"
+               component="Niktar_OrderAutomation/js/form/element/single-checkbox"
+               sortOrder="90">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">is_customer_notified</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Is Customer Notified</label>
+                <dataScope>is_customer_notified</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="boolean">false</map>
+                            <map name="true" xsi:type="boolean">true</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
         </field>
     </fieldset>
 </form>

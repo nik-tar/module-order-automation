@@ -25,4 +25,19 @@ class Collection extends AbstractCollection
         );
     }
 
+    /**
+     * Unserialize fields in each item
+     *
+     * @return $this
+     */
+    protected function _afterLoad(): self
+    {
+        foreach ($this->_items as $item) {
+            if ($item instanceof OrderAutomationRuleModel) {
+                $this->getResource()->unserializeFields($item);
+            }
+        }
+        return parent::_afterLoad();
+    }
+
 }

@@ -6,16 +6,21 @@ use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\ReportingInterface;
 use Magento\Framework\Api\Search\SearchCriteriaBuilder;
 use Magento\Framework\Api\Search\SearchResultInterface;
+use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider;
+use Magento\Framework\Reflection\DataObjectProcessor;
+use Magento\Ui\DataProvider\Modifier\PoolInterface;
 use Magento\Ui\DataProvider\SearchResultFactory;
+use Niktar\OrderAutomation\Api\Data\ActionDataInterface;
 use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface as ModelInterface;
 use Niktar\OrderAutomation\Api\OrderAutomationRuleRepositoryInterface;
+use Niktar\OrderAutomation\Model\OrderAutomationRule;
+use Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule\CollectionFactory;
 
 /**
  * DataProvider component.
  */
-class RuleDataProvider extends DataProvider
+class RuleDataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
 {
     /**
      * @var array
@@ -30,8 +35,11 @@ class RuleDataProvider extends DataProvider
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
      * @param RequestInterface $request
      * @param FilterBuilder $filterBuilder
+     * @param CollectionFactory $collectionFactory
      * @param OrderAutomationRuleRepositoryInterface $ruleRepository
      * @param SearchResultFactory $searchResultFactory
+     * @param DataPersistorInterface $dataPersistor
+     * @param DataObjectProcessor $dataObjectProcessor
      * @param array $meta
      * @param array $data
      */
@@ -39,43 +47,21 @@ class RuleDataProvider extends DataProvider
         $name,
         $primaryFieldName,
         $requestFieldName,
-        ReportingInterface $reporting,
-        SearchCriteriaBuilder $searchCriteriaBuilder,
-        RequestInterface $request,
-        FilterBuilder $filterBuilder,
-        private OrderAutomationRuleRepositoryInterface $ruleRepository,
-        private SearchResultFactory $searchResultFactory,
+        CollectionFactory $collectionFactory,
+        private DataPersistorInterface $dataPersistor,
+        private DataObjectProcessor $dataObjectProcessor,
         array $meta = [],
-        array $data = []
+        array $data = [],
+        PoolInterface $pool = null
     ) {
+        $this->collection = $collectionFactory->create();
         parent::__construct(
             $name,
             $primaryFieldName,
             $requestFieldName,
-            $reporting,
-            $searchCriteriaBuilder,
-            $request,
-            $filterBuilder,
             $meta,
-            $data
-        );
-    }
-
-    /**
-     * Returns searching result.
-     *
-     * @return SearchResultInterface
-     */
-    public function getSearchResult()
-    {
-        $searchCriteria = $this->getSearchCriteria();
-        $result = $this->ruleRepository->getList($searchCriteria);
-
-        return $this->searchResultFactory->create(
-            $result->getItems(),
-            $result->getTotalCount(),
-            $searchCriteria,
-            ModelInterface::RULE_ID
+            $data,
+            $pool
         );
     }
 
@@ -89,17 +75,47 @@ class RuleDataProvider extends DataProvider
         if ($this->loadedData) {
             return $this->loadedData;
         }
-        $this->loadedData = parent::getData();
-        $itemsById = [];
 
-        foreach ($this->loadedData['items'] as $item) {
-            $itemsById[(int)$item[ModelInterface::RULE_ID]] = $item;
+        $items = $this->collection->getItems();
+        /** @var OrderAutomationRule $rule */
+        foreach ($items as $rule) {
+            $ruleData = $this->dataObjectProcessor->buildOutputDataArray(
+                $rule,
+                ModelInterface::class
+            );
+            $this->loadedData[$rule->getId()] = $this->extractActionData($ruleData);
         }
 
-        if ($id = $this->request->getParam(ModelInterface::RULE_ID)) {
-            $this->loadedData['entity'] = $itemsById[(int)$id];
+        $data = $this->dataPersistor->get('niktar_order_automation_rule_form');
+        if (!empty($data)) {
+            $rule = $this->collection->getNewEmptyItem();
+            $rule->setData($data);
+            $ruleData = $rule->getData();
+            $this->loadedData[$rule->getId()] = $this->extractActionData($ruleData);
+            $this->dataPersistor->clear('niktar_order_automation_rule_form');
         }
 
         return $this->loadedData;
+    }
+
+    /**
+     * Extract action data to fill its fields in rule edit form.
+     *
+     * @param array $ruleData
+     * @return array
+     */
+    private function extractActionData(array $ruleData): array
+    {
+        $actionData = $ruleData[ModelInterface::ACTION_DATA] ?? null;
+        if ($actionData === null) {
+            return $ruleData;
+        }
+        if ($actionData instanceof ActionDataInterface) {
+            $actionData = $actionData->__toArray();
+        }
+        if (!is_array($actionData)) {
+            return $ruleData;
+        }
+        return [...$ruleData, ...$actionData];
     }
 }

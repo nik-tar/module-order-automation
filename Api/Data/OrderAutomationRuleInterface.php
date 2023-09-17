@@ -11,7 +11,6 @@ interface OrderAutomationRuleInterface extends ExtensibleDataInterface
     public const PAYMENT_METHOD = 'payment_method';
     public const APPLY_IN = 'apply_in';
     public const ORDER_STATUS = 'order_status';
-    public const ACTION_TYPE = 'action_type';
     public const ACTION_DATA = 'action_data';
 
     /**
@@ -59,26 +58,15 @@ interface OrderAutomationRuleInterface extends ExtensibleDataInterface
     public function setOrderStatus(string $orderStatus): void;
 
     /**
-     * @return int
+     * @return \Niktar\OrderAutomation\Api\Data\ActionDataInterface
      */
-    public function getActionType(): int;
+    public function getActionData(): ActionDataInterface;
 
     /**
-     * @param int $actionType
+     * @param \Niktar\OrderAutomation\Api\Data\ActionDataInterface $actionData
      * @return void
      */
-    public function setActionType(int $actionType): void;
-
-    /**
-     * @return string
-     */
-    public function getActionData(): string;
-
-    /**
-     * @param string $actionData
-     * @return void
-     */
-    public function setActionData(string $actionData): void;
+    public function setActionData(ActionDataInterface $actionData): void;
 
     /**
      * @return \Niktar\OrderAutomation\Api\Data\OrderAutomationRuleExtensionInterface

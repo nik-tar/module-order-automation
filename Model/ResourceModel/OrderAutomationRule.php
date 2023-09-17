@@ -26,6 +26,7 @@ class OrderAutomationRule extends AbstractDb
     protected $_serializableFields = [
         OrderAutomationRuleInterface::ACTION_DATA => [
             [
+                ActionDataInterface::ACTION_TYPE => 0,
                 ActionDataInterface::EMAIL_TEMPLATE => null,
                 ActionDataInterface::NEW_ORDER_STATUS => null,
                 ActionDataInterface::COMMENT_TEXT => null,
@@ -33,6 +34,7 @@ class OrderAutomationRule extends AbstractDb
                 ActionDataInterface::IS_CUSTOMER_NOTIFIED => false
             ],
             [
+                ActionDataInterface::ACTION_TYPE => 0,
                 ActionDataInterface::EMAIL_TEMPLATE => null,
                 ActionDataInterface::NEW_ORDER_STATUS => null,
                 ActionDataInterface::COMMENT_TEXT => null,
