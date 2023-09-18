@@ -7,8 +7,16 @@
                 type="Niktar\OrderAutomation\Model\RuleSearchResults"/>
     <preference for="Niktar\OrderAutomation\Api\RuleRepositoryInterface"
                 type="Niktar\OrderAutomation\Model\RuleRepository"/>
+
     <preference for="Niktar\OrderAutomation\Api\Data\ActionDataInterface"
                 type="Niktar\OrderAutomation\Model\Data\ActionData"/>
+
+    <preference for="Niktar\OrderAutomation\Api\Data\ActionLogInterface"
+                type="Niktar\OrderAutomation\Model\ActionLog"/>
+    <preference for="Niktar\OrderAutomation\Api\Data\ActionLogSearchResultsInterface"
+                type="Niktar\OrderAutomation\Model\ActionLogSearchResults"/>
+    <preference for="Niktar\OrderAutomation\Api\ActionLogRepositoryInterface"
+                type="Niktar\OrderAutomation\Model\ActionLogRepository"/>
 
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
