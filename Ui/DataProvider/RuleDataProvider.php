@@ -2,18 +2,11 @@
 
 namespace Niktar\OrderAutomation\Ui\DataProvider;
 
-use Magento\Framework\Api\FilterBuilder;
-use Magento\Framework\Api\Search\ReportingInterface;
-use Magento\Framework\Api\Search\SearchCriteriaBuilder;
-use Magento\Framework\Api\Search\SearchResultInterface;
 use Magento\Framework\App\Request\DataPersistorInterface;
-use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Reflection\DataObjectProcessor;
 use Magento\Ui\DataProvider\Modifier\PoolInterface;
-use Magento\Ui\DataProvider\SearchResultFactory;
 use Niktar\OrderAutomation\Api\Data\ActionDataInterface;
 use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface as ModelInterface;
-use Niktar\OrderAutomation\Api\OrderAutomationRuleRepositoryInterface;
 use Niktar\OrderAutomation\Model\OrderAutomationRule;
 use Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule\CollectionFactory;
 
@@ -31,17 +24,12 @@ class RuleDataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
      * @param string $name
      * @param string $primaryFieldName
      * @param string $requestFieldName
-     * @param ReportingInterface $reporting
-     * @param SearchCriteriaBuilder $searchCriteriaBuilder
-     * @param RequestInterface $request
-     * @param FilterBuilder $filterBuilder
      * @param CollectionFactory $collectionFactory
-     * @param OrderAutomationRuleRepositoryInterface $ruleRepository
-     * @param SearchResultFactory $searchResultFactory
      * @param DataPersistorInterface $dataPersistor
      * @param DataObjectProcessor $dataObjectProcessor
      * @param array $meta
      * @param array $data
+     * @param PoolInterface|null $pool
      */
     public function __construct(
         $name,

@@ -88,7 +88,7 @@ class Save extends Action implements HttpPostActionInterface
 
         $data[ModelInterface::ACTION_DATA] = [
             ActionDataInterface::ACTION_TYPE => $data[ActionDataInterface::ACTION_TYPE] ?? 0,
-            ActionDataInterface::EMAIL_TEMPLATE => /*$data[ActionDataInterface::EMAIL_TEMPLATE] ?? */null,
+            ActionDataInterface::EMAIL_TEMPLATE => $data[ActionDataInterface::EMAIL_TEMPLATE] ?? null,
             ActionDataInterface::NEW_ORDER_STATUS => $data[ActionDataInterface::NEW_ORDER_STATUS] ?? null,
             ActionDataInterface::COMMENT_TEXT => $data[ActionDataInterface::COMMENT_TEXT] ?? null,
             ActionDataInterface::IS_COMMENT_VISIBLE_ON_FRONT => $data[ActionDataInterface::IS_COMMENT_VISIBLE_ON_FRONT] ?? false,

@@ -25,9 +25,9 @@ interface ActionDataInterface extends ExtensibleDataInterface
     public function getActionType(): int;
 
     /**
-     * @return int|null
+     * @return string|int|null
      */
-    public function getEmailTemplate(): ?int;
+    public function getEmailTemplate(): string|int|null;
 
     /**
      * @return string|null
@@ -56,10 +56,10 @@ interface ActionDataInterface extends ExtensibleDataInterface
     public function setActionType(int $actionType): void;
 
     /**
-     * @param int|null $emailTemplate
+     * @param string|int|null $emailTemplate
      * @return void
      */
-    public function setEmailTemplate(?int $emailTemplate): void;
+    public function setEmailTemplate(string|int|null $emailTemplate): void;
 
     /**
      * @param string|null $newOrderStatus

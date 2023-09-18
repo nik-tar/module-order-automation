@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Niktar\OrderAutomation\Ui\Source\Email\Template\Reminder" type="Magento\Config\Model\Config\Source\Email\Template">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="path" xsi:type="string">order_automation_reminder_email_template</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Niktar\OrderAutomation\Helper\ActionData">
+        <arguments>
+            <argument name="emailTemplateSource" xsi:type="object">Niktar\OrderAutomation\Ui\Source\Email\Template\Reminder</argument>
+        </arguments>
+    </type>
+</config>

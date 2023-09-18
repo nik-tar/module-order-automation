@@ -14,7 +14,7 @@ class ActionType implements OptionSourceInterface
     /**
      * @var array
      */
-    private $options = [];
+    private array $options = [];
 
     /**
      * @inheritDoc

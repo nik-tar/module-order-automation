@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Niktar\OrderAutomation\Helper;
 
 use Niktar\OrderAutomation\Api\Data\ActionDataInterface;
+use \Magento\Config\Model\Config\Source\Email\Template;
 use Niktar\OrderAutomation\Ui\Source\ActionType;
 use Niktar\OrderAutomation\Ui\Source\OrderStatus;
 
@@ -46,12 +47,14 @@ class ActionData
     /**
      * @param ActionType $actionTypeSource
      * @param OrderStatus $orderStatusSource
+     * @param Template $emailTemplateSource
      * @param array $keyToReadableFormatMap
      * @param array $visibleByActionType
      */
     public function __construct(
         private ActionType $actionTypeSource,
         private OrderStatus $orderStatusSource,
+        private Template $emailTemplateSource,
         array $keyToReadableFormatMap = [],
         array $visibleByActionType = []
     ) {
@@ -96,7 +99,8 @@ class ActionData
     {
         switch ($key) {
             case ActionDataInterface::EMAIL_TEMPLATE:
-                return 'Empty';
+                $options = $this->getEmailTemplateFlattenedOptions();
+                return (string)($options[$value] ?? 'Empty');
             case ActionDataInterface::ACTION_TYPE:
                 $options = $this->actionTypeSource->toArray();
                 return (string)($options[$value] ?? 'Empty');
@@ -130,5 +134,28 @@ class ActionData
             );
         }
         return $actionData;
+    }
+
+    /**
+     * @return array
+     */
+    private function getEmailTemplateFlattenedOptions(): array
+    {
+        $emailTemplateOptions = $this->emailTemplateSource->toOptionArray();
+        return array_reduce($emailTemplateOptions, [$this, 'flattenOptionArrayItemCallback'], []);
+    }
+
+    /**
+     * @param array $carry
+     * @param array $item
+     * @return array
+     */
+    private function flattenOptionArrayItemCallback(array $carry, array $item): array
+    {
+        if (empty($item['value'])) {
+            return $carry;
+        }
+        $carry[$item['value']] = $item['label'];
+        return $carry;
     }
 }

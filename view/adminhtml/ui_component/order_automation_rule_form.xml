@@ -226,12 +226,12 @@
                 <label translate="true">Email Template</label>
                 <dataScope>email_template</dataScope>
                 <visible>false</visible>
+                <notice translate="true">Email template chosen based on theme fallback when "Default" option is selected.</notice>
             </settings>
             <formElements>
                 <select>
                     <settings>
-                        <caption translate="true">-- Please Select --</caption>
-                        <options class="Magento\Config\Model\Config\Source\Email\Template"/>
+                        <options class="Niktar\OrderAutomation\Ui\Source\Email\Template\Reminder"/>
                     </settings>
                 </select>
             </formElements>

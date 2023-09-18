@@ -18,7 +18,7 @@ class ActionData extends AbstractExtensibleObject implements ActionDataInterface
     /**
      * @inheritDoc
      */
-    public function getEmailTemplate(): ?int
+    public function getEmailTemplate(): string|int|null
     {
         return $this->_get(self::EMAIL_TEMPLATE);
     }
@@ -66,7 +66,7 @@ class ActionData extends AbstractExtensibleObject implements ActionDataInterface
     /**
      * @inheritDoc
      */
-    public function setEmailTemplate(?int $emailTemplate): void
+    public function setEmailTemplate(string|int|null $emailTemplate): void
     {
         $this->setData(self::EMAIL_TEMPLATE, $emailTemplate);
     }
