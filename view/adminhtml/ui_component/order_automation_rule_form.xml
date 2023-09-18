@@ -125,6 +125,86 @@
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">true</rule>
                 </validation>
+                <switcherConfig>
+                    <rules>
+                        <rule name="0">
+                            <value>1</value>
+                            <actions>
+                                <action name="0">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.email_template</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="1">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.new_order_status</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.comment_text</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="3">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.is_comment_visible_on_front</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="4">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.is_customer_notified</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="1">
+                            <value>2</value>
+                            <actions>
+                                <action name="0">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.email_template</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.new_order_status</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="2">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.comment_text</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="3">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.is_comment_visible_on_front</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="4">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.is_customer_notified</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="2">
+                            <value>3</value>
+                            <actions>
+                                <action name="0">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.email_template</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.new_order_status</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.comment_text</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="3">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.is_comment_visible_on_front</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="4">
+                                    <target>order_automation_rule_form.order_automation_rule_form.general.is_customer_notified</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                    </rules>
+                    <enabled>true</enabled>
+                </switcherConfig>
             </settings>
             <formElements>
                 <select>
@@ -145,6 +225,7 @@
                 <dataType>text</dataType>
                 <label translate="true">Email Template</label>
                 <dataScope>email_template</dataScope>
+                <visible>false</visible>
             </settings>
             <formElements>
                 <select>
@@ -165,6 +246,7 @@
                 <dataType>text</dataType>
                 <label translate="true">New Order Status</label>
                 <dataScope>new_order_status</dataScope>
+                <visible>false</visible>
             </settings>
             <formElements>
                 <select>
@@ -185,6 +267,7 @@
                 <dataType>text</dataType>
                 <label translate="true">Comment Text</label>
                 <dataScope>comment_text</dataScope>
+                <visible>false</visible>
             </settings>
         </field>
         <field name="is_comment_visible_on_front"
@@ -200,6 +283,7 @@
                 <dataType>number</dataType>
                 <label translate="true">Is Comment Visible On Front</label>
                 <dataScope>is_comment_visible_on_front</dataScope>
+                <visible>false</visible>
             </settings>
             <formElements>
                 <checkbox>
@@ -226,6 +310,7 @@
                 <dataType>number</dataType>
                 <label translate="true">Is Customer Notified</label>
                 <dataScope>is_customer_notified</dataScope>
+                <visible>false</visible>
             </settings>
             <formElements>
                 <checkbox>

@@ -39,4 +39,27 @@ class OrderStatus implements OptionSourceInterface
         }
         return $options;
     }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        $optionArray = $this->toOptionArray();
+        return array_reduce($optionArray, [$this, 'flattenOptionArrayItemCallback'], []);
+    }
+
+    /**
+     * @param array $carry
+     * @param array $item
+     * @return array
+     */
+    private function flattenOptionArrayItemCallback(array $carry, array $item): array
+    {
+        if (empty($item['value'])) {
+            return $carry;
+        }
+        $carry[$item['value']] = $item['label'];
+        return $carry;
+    }
 }
