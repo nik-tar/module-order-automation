@@ -5,22 +5,21 @@ namespace Niktar\OrderAutomation\Model;
 
 use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
-use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterfaceFactory as ModelFactory;
-use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface as ModelInterface;
-use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleSearchResultsInterface as SearchResultsInterface;
-use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleSearchResultsInterfaceFactory as SearchResultsFactory;
-use Niktar\OrderAutomation\Api\OrderAutomationRuleRepositoryInterface;
-use Niktar\OrderAutomation\Model\OrderAutomationRule as Model;
-use Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule as ResourceModel;
-use Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule\Collection as Collection;
-use Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule\CollectionFactory as CollectionFactory;
+use Niktar\OrderAutomation\Api\Data\ActionLogInterfaceFactory as ModelFactory;
+use Niktar\OrderAutomation\Api\Data\ActionLogInterface as ModelInterface;
+use Niktar\OrderAutomation\Api\Data\ActionLogSearchResultsInterface as SearchResultsInterface;
+use Niktar\OrderAutomation\Api\Data\ActionLogSearchResultsInterfaceFactory as SearchResultsFactory;
+use Niktar\OrderAutomation\Api\ActionLogRepositoryInterface;
+use Niktar\OrderAutomation\Model\ActionLog as Model;
+use Niktar\OrderAutomation\Model\ResourceModel\ActionLog as ResourceModel;
+use Niktar\OrderAutomation\Model\ResourceModel\ActionLog\Collection as Collection;
+use Niktar\OrderAutomation\Model\ResourceModel\ActionLog\CollectionFactory as CollectionFactory;
 
-class OrderAutomationRuleRepository implements OrderAutomationRuleRepositoryInterface
+class ActionLogRepository implements ActionLogRepositoryInterface
 {
     /**
      * @param ResourceModel $resourceModel
@@ -43,21 +42,21 @@ class OrderAutomationRuleRepository implements OrderAutomationRuleRepositoryInte
     /**
      * @inheritDoc
      */
-    public function save(ModelInterface $rule): void
+    public function save(ModelInterface $actionLog): void
     {
         try {
             $model = $this->modelFactory->create();
-            $model->addData($rule->getData());
+            $model->addData($actionLog->getData());
             $model->setHasDataChanges(true);
 
-            if (!$model->getData(ModelInterface::RULE_ID)) {
+            if (!$model->getData(ModelInterface::ACTION_ID)) {
                 $model->isObjectNew(true);
             }
             $this->resourceModel->save($model);
         } catch (\Exception $exception) {
             throw new CouldNotSaveException(
                 __(
-                    'Could not save the Order Automation Rule: %1',
+                    'Could not save the Order Automation Action Log: %1',
                     $exception->getMessage()
                 )
             );
@@ -69,13 +68,13 @@ class OrderAutomationRuleRepository implements OrderAutomationRuleRepositoryInte
      */
     public function getById(int $id): ModelInterface
     {
-        /** @var Model $rule */
-        $rule = $this->modelFactory->create();
-        $this->resourceModel->load($rule, $id);
-        if (!$rule->getData(ModelInterface::RULE_ID)) {
-            throw new NoSuchEntityException(__('Order Automation Rule with id "%1" does not exist.', $id));
+        /** @var Model $actionLog */
+        $actionLog = $this->modelFactory->create();
+        $this->resourceModel->load($actionLog, $id);
+        if (!$actionLog->getData(ModelInterface::ACTION_ID)) {
+            throw new NoSuchEntityException(__('Order Automation Action Log with id "%1" does not exist.', $id));
         }
-        return $rule;
+        return $actionLog;
     }
 
     /**
@@ -102,15 +101,15 @@ class OrderAutomationRuleRepository implements OrderAutomationRuleRepositoryInte
     /**
      * @inheritDoc
      */
-    public function delete(ModelInterface $rule): void
+    public function delete(ModelInterface $actionLog): void
     {
         try {
-            /** @var Model $otp */
-            $this->resourceModel->delete($otp);
+            /** @var Model $actionLog */
+            $this->resourceModel->delete($actionLog);
         } catch (\Exception $exception) {
             throw new CouldNotDeleteException(
                 __(
-                    'Could not delete the Order Automation Rule: %1',
+                    'Could not delete the Order Automation Action Log: %1',
                     $exception->getMessage()
                 )
             );

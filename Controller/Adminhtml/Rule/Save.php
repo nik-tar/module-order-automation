@@ -13,9 +13,9 @@ use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Niktar\OrderAutomation\Api\Data\ActionDataInterface;
-use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface as ModelInterface;
-use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterfaceFactory as ModelFactory;
-use Niktar\OrderAutomation\Api\OrderAutomationRuleRepositoryInterface as RuleRepository;
+use Niktar\OrderAutomation\Api\Data\RuleInterface as ModelInterface;
+use Niktar\OrderAutomation\Api\Data\RuleInterfaceFactory as ModelFactory;
+use Niktar\OrderAutomation\Api\RuleRepositoryInterface as RuleRepository;
 
 /**
  * Save Rule controller action.

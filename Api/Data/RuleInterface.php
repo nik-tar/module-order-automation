@@ -5,7 +5,7 @@ namespace Niktar\OrderAutomation\Api\Data;
 
 use Magento\Framework\Api\ExtensibleDataInterface;
 
-interface OrderAutomationRuleInterface extends ExtensibleDataInterface
+interface RuleInterface extends ExtensibleDataInterface
 {
     public const RULE_ID = 'rule_id';
     public const PAYMENT_METHOD = 'payment_method';
@@ -69,13 +69,13 @@ interface OrderAutomationRuleInterface extends ExtensibleDataInterface
     public function setActionData(ActionDataInterface $actionData): void;
 
     /**
-     * @return \Niktar\OrderAutomation\Api\Data\OrderAutomationRuleExtensionInterface
+     * @return \Niktar\OrderAutomation\Api\Data\RuleExtensionInterface
      */
-    public function getExtensionAttributes(): \Niktar\OrderAutomation\Api\Data\OrderAutomationRuleExtensionInterface;
+    public function getExtensionAttributes(): \Niktar\OrderAutomation\Api\Data\RuleExtensionInterface;
 
     /**
-     * @param \Niktar\OrderAutomation\Api\Data\OrderAutomationRuleExtensionInterface $extensionAttributes
+     * @param \Niktar\OrderAutomation\Api\Data\RuleExtensionInterface $extensionAttributes
      * @return void
      */
-    public function setExtensionAttributes(\Niktar\OrderAutomation\Api\Data\OrderAutomationRuleExtensionInterface $extensionAttributes): void;
+    public function setExtensionAttributes(\Niktar\OrderAutomation\Api\Data\RuleExtensionInterface $extensionAttributes): void;
 }

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule;
+namespace Niktar\OrderAutomation\Model\ResourceModel\Rule;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
-use Niktar\OrderAutomation\Model\OrderAutomationRule as OrderAutomationRuleModel;
-use Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule as OrderAutomationRuleResourceModel;
+use Niktar\OrderAutomation\Model\Rule as OrderAutomationRuleModel;
+use Niktar\OrderAutomation\Model\ResourceModel\Rule as OrderAutomationRuleResourceModel;
 
 class Collection extends AbstractCollection
 {

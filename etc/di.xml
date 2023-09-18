@@ -1,29 +1,38 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface"
-                type="Niktar\OrderAutomation\Model\OrderAutomationRule"/>
-    <preference for="Niktar\OrderAutomation\Api\Data\OrderAutomationRuleSearchResultsInterface"
-                type="Niktar\OrderAutomation\Model\OrderAutomationRuleSearchResults"/>
-    <preference for="Niktar\OrderAutomation\Api\OrderAutomationRuleRepositoryInterface"
-                type="Niktar\OrderAutomation\Model\OrderAutomationRuleRepository"/>
+    <preference for="Niktar\OrderAutomation\Api\Data\RuleInterface"
+                type="Niktar\OrderAutomation\Model\Rule"/>
+    <preference for="Niktar\OrderAutomation\Api\Data\RuleSearchResultsInterface"
+                type="Niktar\OrderAutomation\Model\RuleSearchResults"/>
+    <preference for="Niktar\OrderAutomation\Api\RuleRepositoryInterface"
+                type="Niktar\OrderAutomation\Model\RuleRepository"/>
     <preference for="Niktar\OrderAutomation\Api\Data\ActionDataInterface"
                 type="Niktar\OrderAutomation\Model\Data\ActionData"/>
 
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="order_automation_rule_listing_data_source" xsi:type="string">Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule\Grid\Collection</item>
+                <item name="order_automation_rule_listing_data_source" xsi:type="string">Niktar\OrderAutomation\Model\ResourceModel\Rule\Grid\Collection</item>
+                <item name="order_automation_action_log_listing_data_source" xsi:type="string">Niktar\OrderAutomation\Model\ResourceModel\ActionLog\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
 
-    <type name="Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule\Grid\Collection">
+    <type name="Niktar\OrderAutomation\Model\ResourceModel\Rule\Grid\Collection">
         <arguments>
             <argument name="mainTable" xsi:type="string">order_automation_rule</argument>
             <argument name="eventPrefix" xsi:type="string">order_automation_rule_grid_collection</argument>
             <argument name="eventObject" xsi:type="string">rule_grid_collection</argument>
-            <argument name="resourceModel" xsi:type="string">Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule</argument>
+            <argument name="resourceModel" xsi:type="string">Niktar\OrderAutomation\Model\ResourceModel\Rule</argument>
+        </arguments>
+    </type>
+    <type name="Niktar\OrderAutomation\Model\ResourceModel\ActionLog\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">order_automation_action_log</argument>
+            <argument name="eventPrefix" xsi:type="string">order_automation_action_log_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">action_log_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Niktar\OrderAutomation\Model\ResourceModel\ActionLog</argument>
         </arguments>
     </type>
 </config>

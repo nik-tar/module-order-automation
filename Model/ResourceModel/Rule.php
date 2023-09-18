@@ -11,9 +11,9 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Framework\Model\ResourceModel\Db\Context;
 use Magento\Framework\Reflection\DataObjectProcessor;
 use Niktar\OrderAutomation\Api\Data\ActionDataInterface;
-use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface;
+use Niktar\OrderAutomation\Api\Data\RuleInterface;
 
-class OrderAutomationRule extends AbstractDb
+class Rule extends AbstractDb
 {
     /**
      * @var string
@@ -24,7 +24,7 @@ class OrderAutomationRule extends AbstractDb
      * @inheritDoc
      */
     protected $_serializableFields = [
-        OrderAutomationRuleInterface::ACTION_DATA => [
+        RuleInterface::ACTION_DATA => [
             [
                 ActionDataInterface::ACTION_TYPE => 0,
                 ActionDataInterface::EMAIL_TEMPLATE => null,
@@ -48,11 +48,11 @@ class OrderAutomationRule extends AbstractDb
     /**
      * By default, if we add fields to $_serializableFields they serialize to array,
      * but I wanted to have data classes instead of simple arrays
-     * @see \Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule::_serializeField
-     * @see \Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule::_unserializeField
+     * @see \Niktar\OrderAutomation\Model\ResourceModel\Rule::_serializeField
+     * @see \Niktar\OrderAutomation\Model\ResourceModel\Rule::_unserializeField
      */
     const TYPED_FIELDS = [
-        OrderAutomationRuleInterface::ACTION_DATA => ActionDataInterface::class
+        RuleInterface::ACTION_DATA => ActionDataInterface::class
     ];
 
     /**
@@ -79,7 +79,7 @@ class OrderAutomationRule extends AbstractDb
     {
         $this->_init(
             'order_automation_rule',
-            OrderAutomationRuleInterface::RULE_ID
+            RuleInterface::RULE_ID
         );
     }
 

@@ -4,14 +4,14 @@ declare(strict_types=1);
 namespace Niktar\OrderAutomation\Model;
 
 use Magento\Framework\Api\SearchResults;
-use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleSearchResultsInterface;
+use Niktar\OrderAutomation\Api\Data\RuleSearchResultsInterface;
 
-class OrderAutomationRuleSearchResults extends SearchResults implements OrderAutomationRuleSearchResultsInterface
+class RuleSearchResults extends SearchResults implements RuleSearchResultsInterface
 {
     /**
      * Get items list.
      *
-     * @return \Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface[]
+     * @return \Niktar\OrderAutomation\Api\Data\RuleInterface[]
      */
     public function getItems(): array
     {
@@ -21,7 +21,7 @@ class OrderAutomationRuleSearchResults extends SearchResults implements OrderAut
     /**
      * Set items list.
      *
-     * @param \Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface[] $items
+     * @param \Niktar\OrderAutomation\Api\Data\RuleInterface[] $items
      * @return void
      */
     public function setItems(array $items): void

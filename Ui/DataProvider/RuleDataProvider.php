@@ -6,9 +6,9 @@ use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Reflection\DataObjectProcessor;
 use Magento\Ui\DataProvider\Modifier\PoolInterface;
 use Niktar\OrderAutomation\Api\Data\ActionDataInterface;
-use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface as ModelInterface;
-use Niktar\OrderAutomation\Model\OrderAutomationRule;
-use Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule\CollectionFactory;
+use Niktar\OrderAutomation\Api\Data\RuleInterface as ModelInterface;
+use Niktar\OrderAutomation\Model\Rule;
+use Niktar\OrderAutomation\Model\ResourceModel\Rule\CollectionFactory;
 
 /**
  * DataProvider component.
@@ -65,7 +65,7 @@ class RuleDataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
         }
 
         $items = $this->collection->getItems();
-        /** @var OrderAutomationRule $rule */
+        /** @var Rule $rule */
         foreach ($items as $rule) {
             $ruleData = $this->dataObjectProcessor->buildOutputDataArray(
                 $rule,

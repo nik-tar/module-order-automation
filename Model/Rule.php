@@ -5,9 +5,9 @@ namespace Niktar\OrderAutomation\Model;
 
 use Magento\Framework\Model\AbstractExtensibleModel;
 use Niktar\OrderAutomation\Api\Data\ActionDataInterface;
-use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface;
+use Niktar\OrderAutomation\Api\Data\RuleInterface;
 
-class OrderAutomationRule extends AbstractExtensibleModel implements OrderAutomationRuleInterface
+class Rule extends AbstractExtensibleModel implements RuleInterface
 {
     /**
      * @var string
@@ -20,7 +20,7 @@ class OrderAutomationRule extends AbstractExtensibleModel implements OrderAutoma
     protected function _construct()
     {
         $this->_init(
-            ResourceModel\OrderAutomationRule::class
+            ResourceModel\Rule::class
         );
     }
 
@@ -108,7 +108,7 @@ class OrderAutomationRule extends AbstractExtensibleModel implements OrderAutoma
     /**
      * @inheritDoc
      */
-    public function getExtensionAttributes(): \Niktar\OrderAutomation\Api\Data\OrderAutomationRuleExtensionInterface
+    public function getExtensionAttributes(): \Niktar\OrderAutomation\Api\Data\RuleExtensionInterface
     {
         return $this->_getExtensionAttributes();
     }
@@ -116,7 +116,7 @@ class OrderAutomationRule extends AbstractExtensibleModel implements OrderAutoma
     /**
      * @inheritDoc
      */
-    public function setExtensionAttributes(\Niktar\OrderAutomation\Api\Data\OrderAutomationRuleExtensionInterface $extensionAttributes): void
+    public function setExtensionAttributes(\Niktar\OrderAutomation\Api\Data\RuleExtensionInterface $extensionAttributes): void
     {
         $this->_setExtensionAttributes($extensionAttributes);
     }

@@ -6,7 +6,7 @@ use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
-use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface;
+use Niktar\OrderAutomation\Api\Data\RuleInterface;
 
 /**
  * Class to build edit and delete link for each item.
@@ -64,9 +64,9 @@ class RuleBlockActions extends Column
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
-                if (isset($item[OrderAutomationRuleInterface::RULE_ID])) {
+                if (isset($item[RuleInterface::RULE_ID])) {
                     $entityName = static::ENTITY_NAME;
-                    $urlData = [OrderAutomationRuleInterface::RULE_ID => $item[OrderAutomationRuleInterface::RULE_ID]];
+                    $urlData = [RuleInterface::RULE_ID => $item[RuleInterface::RULE_ID]];
 
                     $editUrl = $this->urlBuilder->getUrl(static::EDIT_URL_PATH, $urlData);
                     $deleteUrl = $this->urlBuilder->getUrl(static::DELETE_URL_PATH, $urlData);

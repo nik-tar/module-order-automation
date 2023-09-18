@@ -11,8 +11,8 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface as ModelInterface;
-use Niktar\OrderAutomation\Api\OrderAutomationRuleRepositoryInterface;
+use Niktar\OrderAutomation\Api\Data\RuleInterface as ModelInterface;
+use Niktar\OrderAutomation\Api\RuleRepositoryInterface;
 
 /**
  * Delete Rule controller.
@@ -28,11 +28,11 @@ class Delete extends Action implements HttpPostActionInterface, HttpGetActionInt
 
     /**
      * @param Context $context
-     * @param OrderAutomationRuleRepositoryInterface $ruleRepository
+     * @param RuleRepositoryInterface $ruleRepository
      */
     public function __construct(
         Context $context,
-        private OrderAutomationRuleRepositoryInterface $ruleRepository
+        private RuleRepositoryInterface $ruleRepository
     ) {
         parent::__construct($context);
     }

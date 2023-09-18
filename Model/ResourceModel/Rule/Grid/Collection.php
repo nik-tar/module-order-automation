@@ -1,6 +1,6 @@
 <?php
 
-namespace Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule\Grid;
+namespace Niktar\OrderAutomation\Model\ResourceModel\Rule\Grid;
 
 use Magento\Framework\Api\ExtensibleDataInterface;
 use Magento\Framework\Api\Search\SearchResultInterface;
@@ -12,7 +12,7 @@ use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Framework\View\Element\UiComponent\DataProvider\Document;
 use Psr\Log\LoggerInterface;
-use Niktar\OrderAutomation\Model\ResourceModel\OrderAutomationRule\Collection as RuleCollection;
+use Niktar\OrderAutomation\Model\ResourceModel\Rule\Collection as RuleCollection;
 
 class Collection extends RuleCollection implements SearchResultInterface
 {

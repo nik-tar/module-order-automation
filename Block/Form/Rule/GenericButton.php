@@ -4,7 +4,7 @@ namespace Niktar\OrderAutomation\Block\Form\Rule;
 
 use Magento\Backend\Block\Widget\Context;
 use Magento\Framework\UrlInterface;
-use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface;
+use Niktar\OrderAutomation\Api\Data\RuleInterface;
 
 /**
  * Generic (form) button for Rule entity.
@@ -38,7 +38,7 @@ class GenericButton
      */
     public function getRuleId(): int
     {
-        return (int)$this->context->getRequest()->getParam(OrderAutomationRuleInterface::RULE_ID);
+        return (int)$this->context->getRequest()->getParam(RuleInterface::RULE_ID);
     }
 
     /**
