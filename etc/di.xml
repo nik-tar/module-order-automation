@@ -22,7 +22,7 @@
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="order_automation_rule_listing_data_source" xsi:type="string">Niktar\OrderAutomation\Model\ResourceModel\Rule\Grid\Collection</item>
-                <item name="order_automation_action_log_listing_data_source" xsi:type="string">Niktar\OrderAutomation\Model\ResourceModel\ActionLog\Grid\Collection</item>
+                <item name="order_automation_log_listing_data_source" xsi:type="string">Niktar\OrderAutomation\Model\ResourceModel\ActionLog\Grid\Collection</item>
             </argument>
         </arguments>
     </type>

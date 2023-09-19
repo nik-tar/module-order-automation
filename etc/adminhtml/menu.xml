@@ -2,8 +2,14 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Niktar_OrderAutomation::rules" sortOrder="100" title="Order Automation Rule Management"
-             module="Niktar_OrderAutomation" parent="Magento_Sales::sales" resource="Niktar_OrderAutomation::rules"
+        <add id="Niktar_OrderAutomation::general" sortOrder="100" title="Order Automation"
+             module="Niktar_OrderAutomation" parent="Magento_Sales::sales" resource="Niktar_OrderAutomation::general"
+             translate="title"/>
+        <add id="Niktar_OrderAutomation::rules" sortOrder="10" title="Rule Management"
+             module="Niktar_OrderAutomation" parent="Niktar_OrderAutomation::general" resource="Niktar_OrderAutomation::rules"
              translate="title" action="automation_rule/rule/index"/>
+        <add id="Niktar_OrderAutomation::log" sortOrder="20" title="Action Log"
+             module="Niktar_OrderAutomation" parent="Niktar_OrderAutomation::general" resource="Niktar_OrderAutomation::log"
+             translate="title" action="automation_rule/log/index"/>
     </menu>
 </config>
