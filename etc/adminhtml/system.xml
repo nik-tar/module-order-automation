@@ -13,6 +13,10 @@
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="order_limit_per_run" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Order Limit Per Run</label>
+                    <comment>Maximum number of orders processed for each rule per run</comment>
+                </field>
             </group>
         </section>
     </system>

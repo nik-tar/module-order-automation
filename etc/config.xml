@@ -5,6 +5,7 @@
         <order_automation>
             <general>
                 <enabled>0</enabled>
+                <order_limit_per_run>10</order_limit_per_run>
             </general>
         </order_automation>
     </default>

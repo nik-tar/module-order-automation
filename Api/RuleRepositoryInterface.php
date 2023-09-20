@@ -53,4 +53,10 @@ interface RuleRepositoryInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function deleteById(int $id): void;
+
+    /**
+     * @param int $actionType
+     * @return $this
+     */
+    public function addActionTypeFilter(int $actionType): self;
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="order_automation">
+        <job name="Niktar_OrderAutomation::process_automation_rules"
+             instance="Niktar\OrderAutomation\Cron\ProcessAutomationRules" method="execute">
+            <schedule>*/10 * * * *</schedule>
+        </job>
+    </group>
+</config>

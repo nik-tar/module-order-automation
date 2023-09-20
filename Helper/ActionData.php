@@ -20,7 +20,6 @@ class ActionData
     ];
 
     private const VISIBLE_BY_ACTION_TYPE = [
-        [], // filler
         ActionType::ACTION_TYPE_SEND_EMAIL => [
             ActionDataInterface::EMAIL_TEMPLATE
         ],

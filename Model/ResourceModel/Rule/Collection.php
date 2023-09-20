@@ -40,4 +40,21 @@ class Collection extends AbstractCollection
         return parent::_afterLoad();
     }
 
+    /**
+     * @param int $actionType
+     * @return $this
+     */
+    public function addActionTypeFilter(int $actionType): self
+    {
+        if (!$this->getFlag('action_type_filter_added')) {
+            $this->performAddActionTypeFilter($actionType);
+            $this->setFlag('action_type_filter_added', true);
+        }
+        return $this;
+    }
+
+    private function performAddActionTypeFilter(int $actionType): void
+    {
+        $this->getSelect()->where("JSON_EXTRACT(`main_table`.`action_data`, '\$.action_type') = ?", $actionType);
+    }
 }

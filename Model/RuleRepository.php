@@ -5,10 +5,12 @@ namespace Niktar\OrderAutomation\Model;
 
 use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Niktar\OrderAutomation\Api\Data\ActionDataInterface;
 use Niktar\OrderAutomation\Api\Data\RuleInterfaceFactory as ModelFactory;
 use Niktar\OrderAutomation\Api\Data\RuleInterface as ModelInterface;
 use Niktar\OrderAutomation\Api\Data\RuleSearchResultsInterface as SearchResultsInterface;
@@ -28,6 +30,7 @@ class RuleRepository implements RuleRepositoryInterface
      * @param CollectionProcessorInterface $collectionProcessor
      * @param JoinProcessorInterface $joinProcessor
      * @param SearchResultsFactory $searchResultsFactory
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
      */
     public function __construct(
         private ResourceModel $resourceModel,
@@ -35,7 +38,8 @@ class RuleRepository implements RuleRepositoryInterface
         private CollectionFactory $collectionFactory,
         private CollectionProcessorInterface $collectionProcessor,
         private JoinProcessorInterface $joinProcessor,
-        private SearchResultsFactory $searchResultsFactory
+        private SearchResultsFactory $searchResultsFactory,
+        private SearchCriteriaBuilder $searchCriteriaBuilder
     ) {
     }
 
@@ -80,8 +84,11 @@ class RuleRepository implements RuleRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function getList(SearchCriteriaInterface $criteria): SearchResultsInterface
+    public function getList(SearchCriteriaInterface $criteria = null): SearchResultsInterface
     {
+        if ($criteria === null) {
+            $criteria = $this->searchCriteriaBuilder->create();
+        }
         /** @var Collection $collection */
         $collection = $this->collectionFactory->create();
         $this->joinProcessor->process(
@@ -122,5 +129,14 @@ class RuleRepository implements RuleRepositoryInterface
     public function deleteById(int $id): void
     {
         $this->delete($this->getById($id));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function addActionTypeFilter(int $actionType): RuleRepositoryInterface
+    {
+        $this->searchCriteriaBuilder->addFilter(ActionDataInterface::ACTION_TYPE, $actionType);
+        return $this;
     }
 }

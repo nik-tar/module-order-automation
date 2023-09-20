@@ -7,25 +7,16 @@ use Magento\Framework\Data\OptionSourceInterface;
 
 class ActionType implements OptionSourceInterface
 {
-    public const ACTION_TYPE_SEND_EMAIL = 1;
-    public const ACTION_TYPE_CHANGE_ORDER_STATUS = 2;
-    public const ACTION_TYPE_ADD_ORDER_COMMENT = 3;
-
-    /**
-     * @var array
-     */
-    private array $options = [];
+    public const ACTION_TYPE_SEND_EMAIL = 0;
+    public const ACTION_TYPE_CHANGE_ORDER_STATUS = 1;
+    public const ACTION_TYPE_ADD_ORDER_COMMENT = 2;
 
     /**
      * @inheritDoc
      */
     public function toOptionArray(): array
     {
-        if (!empty($this->options)) {
-            return $this->options;
-        }
-
-        $this->options = [
+        return [
             [
                 'value' => self::ACTION_TYPE_SEND_EMAIL,
                 'label' => __('Send Email to Customer')
@@ -39,7 +30,6 @@ class ActionType implements OptionSourceInterface
                 'label' => __('Add Order Comment')
             ]
         ];
-        return $this->options;
     }
 
     /**
@@ -58,7 +48,7 @@ class ActionType implements OptionSourceInterface
      */
     private function flattenOptionArrayItemCallback(array $carry, array $item): array
     {
-        if (empty($item['value'])) {
+        if (empty($item['value']) && !is_numeric($item['value'])) {
             return $carry;
         }
         $carry[$item['value']] = $item['label'];
