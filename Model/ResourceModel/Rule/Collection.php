@@ -41,10 +41,10 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @param int $actionType
+     * @param string $actionType
      * @return $this
      */
-    public function addActionTypeFilter(int $actionType): self
+    public function addActionTypeFilter(string $actionType): self
     {
         if (!$this->getFlag('action_type_filter_added')) {
             $this->performAddActionTypeFilter($actionType);
@@ -53,7 +53,11 @@ class Collection extends AbstractCollection
         return $this;
     }
 
-    private function performAddActionTypeFilter(int $actionType): void
+    /**
+     * @param string $actionType
+     * @return void
+     */
+    private function performAddActionTypeFilter(string $actionType): void
     {
         $this->getSelect()->where("JSON_EXTRACT(`main_table`.`action_data`, '\$.action_type') = ?", $actionType);
     }

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Niktar\OrderAutomation\Model\Action;
+namespace Niktar\OrderAutomation\Action;
 
 use Psr\Log\LoggerInterface;
 
@@ -12,16 +12,16 @@ class Resolver
      * @param LoggerInterface $logger
      */
     public function __construct(
-        private Pool $actionPool,
-        private LoggerInterface $logger
+        private readonly Pool $actionPool,
+        private readonly LoggerInterface $logger
     ) {
     }
 
     /**
-     * @param int $actionType
+     * @param string $actionType
      * @return ActionInterface|null
      */
-    public function resolve(int $actionType): ?ActionInterface
+    public function resolve(string $actionType): ?ActionInterface
     {
         try {
             return $this->actionPool->getAction($actionType);

@@ -53,24 +53,52 @@
         <arguments>
             <argument name="handlers" xsi:type="array">
                 <item name="debug" xsi:type="object">Niktar\OrderAutomation\Model\LoggerHandler</item>
+                <item name="info" xsi:type="object">Niktar\OrderAutomation\Model\LoggerHandler</item>
                 <item name="error" xsi:type="object">Niktar\OrderAutomation\Model\LoggerHandler</item>
             </argument>
         </arguments>
     </virtualType>
 
-    <type name="Niktar\OrderAutomation\Model\Action\Pool">
+    <type name="Niktar\OrderAutomation\Action\Pool">
         <arguments>
             <argument name="actions" xsi:type="array">
-                <item name="0" xsi:type="object">Niktar\OrderAutomation\Model\Action\SendEmail</item>
-                <item name="1" xsi:type="object">Niktar\OrderAutomation\Model\Action\ChangeOrderStatus</item>
-                <item name="2" xsi:type="object">Niktar\OrderAutomation\Model\Action\AddOrderComment</item>
+                <item name="send_email" xsi:type="object">Niktar\OrderAutomation\Action\SendEmail</item>
+                <item name="change_order_status" xsi:type="object">Niktar\OrderAutomation\Action\ChangeOrderStatus</item>
+                <item name="add_order_comment" xsi:type="object">Niktar\OrderAutomation\Action\AddOrderComment</item>
             </argument>
         </arguments>
     </type>
-    <type name="Niktar\OrderAutomation\Model\Action\Resolver">
+    <type name="Niktar\OrderAutomation\Action\Resolver">
         <arguments>
             <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
         </arguments>
+    </type>
+    <type name="Niktar\OrderAutomation\Action\ChangeOrderStatus">
+        <arguments>
+            <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Niktar\OrderAutomation\Action\AddOrderComment">
+        <arguments>
+            <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Niktar\OrderAutomation\Action\SendEmail">
+        <arguments>
+            <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Niktar\OrderAutomation\Action\CreateInvoice">
+        <arguments>
+            <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
+        </arguments>
+    </type>
+
+    <type name="Niktar\OrderAutomation\Action\ActionInterface">
+        <plugin name="Niktar_OrderAutomation::add_order_comment_after_processing_action"
+                type="Niktar\OrderAutomation\Plugin\AddOrderCommentAfterAction"
+                sortOrder="10"
+        />
     </type>
 
     <type name="Niktar\OrderAutomation\Model\RuleRepository">

@@ -10,7 +10,7 @@ class ActionData extends AbstractExtensibleObject implements ActionDataInterface
     /**
      * @inheritDoc
      */
-    public function getActionType(): int
+    public function getActionType(): string
     {
         return $this->_get(self::ACTION_TYPE);
     }
@@ -58,7 +58,7 @@ class ActionData extends AbstractExtensibleObject implements ActionDataInterface
     /**
      * @inheritDoc
      */
-    public function setActionType(int $actionType): void
+    public function setActionType(string $actionType): void
     {
         $this->setData(self::ACTION_TYPE, $actionType);
     }

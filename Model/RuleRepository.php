@@ -134,7 +134,7 @@ class RuleRepository implements RuleRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function addActionTypeFilter(int $actionType): RuleRepositoryInterface
+    public function addActionTypeFilter(string $actionType): RuleRepositoryInterface
     {
         $this->searchCriteriaBuilder->addFilter(ActionDataInterface::ACTION_TYPE, $actionType);
         return $this;

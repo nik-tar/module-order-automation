@@ -59,15 +59,15 @@ interface ActionLogInterface extends ExtensibleDataInterface
     public function setStatus(string $status): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMessage(): string;
+    public function getMessage(): ?string;
 
     /**
-     * @param string $message
+     * @param string|null $message
      * @return void
      */
-    public function setMessage(string $message): void;
+    public function setMessage(?string $message): void;
 
     /**
      * @return string

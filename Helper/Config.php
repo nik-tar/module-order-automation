@@ -15,7 +15,7 @@ class Config
      * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(
-        private ScopeConfigInterface $scopeConfig
+        private readonly ScopeConfigInterface $scopeConfig
     ) {
     }
 

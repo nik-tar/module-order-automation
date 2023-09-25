@@ -55,8 +55,8 @@ interface RuleRepositoryInterface
     public function deleteById(int $id): void;
 
     /**
-     * @param int $actionType
+     * @param string $actionType
      * @return $this
      */
-    public function addActionTypeFilter(int $actionType): self;
+    public function addActionTypeFilter(string $actionType): self;
 }

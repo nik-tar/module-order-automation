@@ -93,7 +93,7 @@ class ActionLog extends AbstractExtensibleModel implements ActionLogInterface
     /**
      * @inheritDoc
      */
-    public function getMessage(): string
+    public function getMessage(): ?string
     {
         return $this->getData(self::MESSAGE);
     }
@@ -101,7 +101,7 @@ class ActionLog extends AbstractExtensibleModel implements ActionLogInterface
     /**
      * @inheritDoc
      */
-    public function setMessage(string $message): void
+    public function setMessage(?string $message): void
     {
         $this->setData(self::MESSAGE, $message);
     }

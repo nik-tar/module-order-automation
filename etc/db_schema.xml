@@ -23,7 +23,7 @@
         <column xsi:type="int" name="order_id" unsigned="true" nullable="false" identity="false" comment="Order ID"/>
         <column xsi:type="int" name="rule_id" unsigned="true" nullable="false" identity="false" comment="Rule ID"/>
         <column xsi:type="varchar" name="status" nullable="false" length="32" comment="Action result status"/>
-        <column xsi:type="varchar" name="message" nullable="false" length="255" comment="The message in case of error"/>
+        <column xsi:type="text" name="message" nullable="true" comment="The message in case of error"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="Created At"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">

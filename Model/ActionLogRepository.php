@@ -42,7 +42,7 @@ class ActionLogRepository implements ActionLogRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function save(ModelInterface $actionLog): void
+    public function save(ModelInterface $actionLog): ModelInterface
     {
         try {
             $model = $this->modelFactory->create();
@@ -53,6 +53,7 @@ class ActionLogRepository implements ActionLogRepositoryInterface
                 $model->isObjectNew(true);
             }
             $this->resourceModel->save($model);
+            return $model;
         } catch (\Exception $exception) {
             throw new CouldNotSaveException(
                 __(

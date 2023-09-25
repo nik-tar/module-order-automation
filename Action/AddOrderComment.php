@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Niktar\OrderAutomation\Model\Action;
+namespace Niktar\OrderAutomation\Action;
 
 use Niktar\OrderAutomation\Api\Data\RuleInterface;
 use Niktar\OrderAutomation\Helper\Config;
@@ -12,7 +12,7 @@ class AddOrderComment implements ActionInterface
      * @param Config $config
      */
     public function __construct(
-        private Config $config
+        private readonly Config $config
     ) {
     }
 

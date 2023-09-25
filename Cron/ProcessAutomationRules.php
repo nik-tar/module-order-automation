@@ -6,8 +6,8 @@ namespace Niktar\OrderAutomation\Cron;
 use Niktar\OrderAutomation\Api\Data\RuleInterface;
 use Niktar\OrderAutomation\Helper\Config as ConfigHelper;
 use Niktar\OrderAutomation\Helper\Rule as RuleHelper;
-use Niktar\OrderAutomation\Model\Action\ActionInterface;
-use Niktar\OrderAutomation\Model\Action\Resolver;
+use Niktar\OrderAutomation\Action\ActionInterface;
+use Niktar\OrderAutomation\Action\Resolver;
 
 class ProcessAutomationRules
 {
@@ -17,9 +17,9 @@ class ProcessAutomationRules
      * @param Resolver $actionResolver
      */
     public function __construct(
-        private RuleHelper $ruleHelper,
-        private ConfigHelper $configHelper,
-        private Resolver $actionResolver
+        private readonly RuleHelper $ruleHelper,
+        private readonly ConfigHelper $configHelper,
+        private readonly Resolver $actionResolver
     ) {
     }
 

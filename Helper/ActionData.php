@@ -51,9 +51,9 @@ class ActionData
      * @param array $visibleByActionType
      */
     public function __construct(
-        private ActionType $actionTypeSource,
-        private OrderStatus $orderStatusSource,
-        private Template $emailTemplateSource,
+        private readonly ActionType $actionTypeSource,
+        private readonly OrderStatus $orderStatusSource,
+        private readonly Template $emailTemplateSource,
         array $keyToReadableFormatMap = [],
         array $visibleByActionType = []
     ) {

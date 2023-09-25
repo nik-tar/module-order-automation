@@ -11,10 +11,10 @@ interface ActionLogRepositoryInterface
      * Create or update Order Automation Action Log.
      *
      * @param \Niktar\OrderAutomation\Api\Data\ActionLogInterface $actionLog
-     * @return void
+     * @return \Niktar\OrderAutomation\Api\Data\ActionLogInterface
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
-    public function save(\Niktar\OrderAutomation\Api\Data\ActionLogInterface $actionLog): void;
+    public function save(\Niktar\OrderAutomation\Api\Data\ActionLogInterface $actionLog): \Niktar\OrderAutomation\Api\Data\ActionLogInterface;
 
     /**
      * Get Order Automation Action Log by ID

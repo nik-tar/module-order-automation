@@ -7,9 +7,9 @@ use Magento\Framework\Data\OptionSourceInterface;
 
 class ActionType implements OptionSourceInterface
 {
-    public const ACTION_TYPE_SEND_EMAIL = 0;
-    public const ACTION_TYPE_CHANGE_ORDER_STATUS = 1;
-    public const ACTION_TYPE_ADD_ORDER_COMMENT = 2;
+    public const ACTION_TYPE_SEND_EMAIL = 'send_email';
+    public const ACTION_TYPE_CHANGE_ORDER_STATUS = 'change_order_status';
+    public const ACTION_TYPE_ADD_ORDER_COMMENT = 'add_order_comment';
 
     /**
      * @inheritDoc
@@ -48,7 +48,7 @@ class ActionType implements OptionSourceInterface
      */
     private function flattenOptionArrayItemCallback(array $carry, array $item): array
     {
-        if (empty($item['value']) && !is_numeric($item['value'])) {
+        if (empty($item['value']) && !is_string($item['value'])) {
             return $carry;
         }
         $carry[$item['value']] = $item['label'];

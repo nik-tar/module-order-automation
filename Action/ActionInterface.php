@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Niktar\OrderAutomation\Model\Action;
+namespace Niktar\OrderAutomation\Action;
 
 use Niktar\OrderAutomation\Api\Data\RuleInterface;
 

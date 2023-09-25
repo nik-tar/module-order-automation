@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Niktar\OrderAutomation\Model\Action;
+namespace Niktar\OrderAutomation\Action;
 
 class Pool
 {
@@ -9,16 +9,15 @@ class Pool
      * @param ActionInterface[] $actions
      */
     public function __construct(
-        private array $actions = []
+        private readonly array $actions = []
     ) {
     }
 
     /**
-     * @param int $actionType
+     * @param string $actionType
      * @return ActionInterface
-     * @throws \InvalidArgumentException
      */
-    public function getAction(int $actionType): ActionInterface
+    public function getAction(string $actionType): ActionInterface
     {
         if (!isset($this->actions[$actionType])) {
             throw new \InvalidArgumentException('Unknown action type ' . $actionType);

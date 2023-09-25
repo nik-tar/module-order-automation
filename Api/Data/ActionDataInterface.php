@@ -20,9 +20,9 @@ interface ActionDataInterface extends ExtensibleDataInterface
     ];
 
     /**
-     * @return int
+     * @return string
      */
-    public function getActionType(): int;
+    public function getActionType(): string;
 
     /**
      * @return string|int|null
@@ -50,10 +50,10 @@ interface ActionDataInterface extends ExtensibleDataInterface
     public function getIsCustomerNotified(): ?bool;
 
     /**
-     * @param int $actionType
+     * @param string $actionType
      * @return void
      */
-    public function setActionType(int $actionType): void;
+    public function setActionType(string $actionType): void;
 
     /**
      * @param string|int|null $emailTemplate

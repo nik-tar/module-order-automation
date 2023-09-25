@@ -128,7 +128,7 @@
                 <switcherConfig>
                     <rules>
                         <rule name="0">
-                            <value>0</value>
+                            <value>send_email</value>
                             <actions>
                                 <action name="0">
                                     <target>order_automation_rule_form.order_automation_rule_form.general.email_template</target>
@@ -153,7 +153,7 @@
                             </actions>
                         </rule>
                         <rule name="1">
-                            <value>1</value>
+                            <value>change_order_status</value>
                             <actions>
                                 <action name="0">
                                     <target>order_automation_rule_form.order_automation_rule_form.general.email_template</target>
@@ -178,7 +178,7 @@
                             </actions>
                         </rule>
                         <rule name="2">
-                            <value>2</value>
+                            <value>add_order_comment</value>
                             <actions>
                                 <action name="0">
                                     <target>order_automation_rule_form.order_automation_rule_form.general.email_template</target>

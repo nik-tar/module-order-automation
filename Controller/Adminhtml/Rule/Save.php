@@ -16,6 +16,7 @@ use Niktar\OrderAutomation\Api\Data\ActionDataInterface;
 use Niktar\OrderAutomation\Api\Data\RuleInterface as ModelInterface;
 use Niktar\OrderAutomation\Api\Data\RuleInterfaceFactory as ModelFactory;
 use Niktar\OrderAutomation\Api\RuleRepositoryInterface as RuleRepository;
+use Niktar\OrderAutomation\Ui\Source\ActionType;
 
 /**
  * Save Rule controller action.
@@ -87,7 +88,7 @@ class Save extends Action implements HttpPostActionInterface
         }
 
         $data[ModelInterface::ACTION_DATA] = [
-            ActionDataInterface::ACTION_TYPE => $data[ActionDataInterface::ACTION_TYPE] ?? 0,
+            ActionDataInterface::ACTION_TYPE => $data[ActionDataInterface::ACTION_TYPE] ?? ActionType::ACTION_TYPE_SEND_EMAIL,
             ActionDataInterface::EMAIL_TEMPLATE => $data[ActionDataInterface::EMAIL_TEMPLATE] ?? null,
             ActionDataInterface::NEW_ORDER_STATUS => $data[ActionDataInterface::NEW_ORDER_STATUS] ?? null,
             ActionDataInterface::COMMENT_TEXT => $data[ActionDataInterface::COMMENT_TEXT] ?? null,

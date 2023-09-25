@@ -7,10 +7,7 @@ use Magento\Sales\Model\Order\Config;
 
 class OrderStatus implements OptionSourceInterface
 {
-    /**
-     * @var string[]
-     */
-    private array $stateStatuses = [
+    public const STATE_STATUSES = [
         \Magento\Sales\Model\Order::STATE_COMPLETE,
         \Magento\Sales\Model\Order::STATE_CANCELED,
         \Magento\Sales\Model\Order::STATE_HOLDED,
@@ -29,8 +26,8 @@ class OrderStatus implements OptionSourceInterface
      */
     public function toOptionArray()
     {
-        $statuses = $this->stateStatuses
-            ? $this->orderConfig->getStateStatuses($this->stateStatuses)
+        $statuses = self::STATE_STATUSES
+            ? $this->orderConfig->getStateStatuses(self::STATE_STATUSES)
             : $this->orderConfig->getStatuses();
 
         $options = [['value' => '', 'label' => __('-- Please Select --')]];
