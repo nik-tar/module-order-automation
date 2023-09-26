@@ -11,30 +11,29 @@ use Niktar\OrderAutomation\Api\Data\ActionLogInterfaceFactory;
 use Niktar\OrderAutomation\Api\Data\RuleInterface;
 use Niktar\OrderAutomation\Helper\Config;
 use Niktar\OrderAutomation\Helper\Rule as RuleHelper;
-use Niktar\OrderAutomation\Model\Rule\Email\Sender;
 use Niktar\OrderAutomation\Registry\AfterAction;
 use Niktar\OrderAutomation\Ui\Source\ActionStatus;
 use Psr\Log\LoggerInterface;
 
-class SendEmail implements ActionInterface
+abstract class Action implements ActionInterface
 {
+    protected const ERROR_MESSAGE_BASE = 'There was an error while processing order automation rule. ';
+
     /**
      * @param Config $config
      * @param RuleHelper $ruleHelper
      * @param ActionLogInterfaceFactory $actionLogFactory
      * @param ActionLogRepositoryInterface $actionLogRepository
      * @param AfterAction $afterActionRegistry
-     * @param Sender $emailSender
      * @param LoggerInterface $logger
      */
     public function __construct(
-        private readonly Config $config,
-        private readonly RuleHelper $ruleHelper,
-        private readonly ActionLogInterfaceFactory $actionLogFactory,
-        private readonly ActionLogRepositoryInterface $actionLogRepository,
-        private readonly AfterAction $afterActionRegistry,
-        private readonly Sender $emailSender,
-        private readonly LoggerInterface $logger
+        protected readonly Config $config,
+        protected readonly RuleHelper $ruleHelper,
+        protected readonly ActionLogInterfaceFactory $actionLogFactory,
+        protected readonly ActionLogRepositoryInterface $actionLogRepository,
+        protected readonly AfterAction $afterActionRegistry,
+        protected readonly LoggerInterface $logger
     ) {
     }
 
@@ -53,7 +52,7 @@ class SendEmail implements ActionInterface
             /** @var ActionLogInterface $actionLog */
             $actionLog = $this->actionLogFactory->create();
             try {
-                $this->emailSender->send($orderId, $rule);
+                $this->executeAction($orderId, $rule);
                 $actionLogData = [
                     ActionLogInterface::ORDER_ID => (int)$orderId,
                     ActionLogInterface::RULE_ID => $rule->getRuleId(),
@@ -61,7 +60,7 @@ class SendEmail implements ActionInterface
                 ];
                 $actionLog->setData($actionLogData);
             } catch (LocalizedException $e) {
-                $errorMessage = 'There was an error while sending email by order automation rule. '
+                $errorMessage = static::ERROR_MESSAGE_BASE
                     . 'Rule ID: %1. Order ID: %2. Check the logs for more information.';
                 $loggerMessage = "{$errorMessage} Message: %3.";
                 $actionLogData = [
@@ -96,4 +95,20 @@ class SendEmail implements ActionInterface
         }
     }
 
+    /**
+     * Main logic of the rule.
+     *
+     * @param int $orderId
+     * @param RuleInterface $rule
+     * @return void
+     * @throws LocalizedException
+     */
+    protected function executeAction(int $orderId, RuleInterface $rule): void
+    {
+        throw new LocalizedException(__(
+            'Main action logic is not defined. Rule ID: %1. Action type: "%2"',
+            $rule->getRuleId(),
+            $rule->getActionData()->getActionType()
+        ));
+    }
 }

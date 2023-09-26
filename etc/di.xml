@@ -62,9 +62,9 @@
     <type name="Niktar\OrderAutomation\Action\Pool">
         <arguments>
             <argument name="actions" xsi:type="array">
-                <item name="send_email" xsi:type="object">Niktar\OrderAutomation\Action\SendEmail</item>
-                <item name="change_order_status" xsi:type="object">Niktar\OrderAutomation\Action\ChangeOrderStatus</item>
-                <item name="add_order_comment" xsi:type="object">Niktar\OrderAutomation\Action\AddOrderComment</item>
+                <item name="send_email" xsi:type="object">Niktar\OrderAutomation\Action\Custom\SendEmail</item>
+                <item name="change_order_status" xsi:type="object">Niktar\OrderAutomation\Action\Custom\ChangeOrderStatus</item>
+                <item name="add_order_comment" xsi:type="object">Niktar\OrderAutomation\Action\Custom\AddOrderComment</item>
             </argument>
         </arguments>
     </type>
@@ -73,17 +73,17 @@
             <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
         </arguments>
     </type>
-    <type name="Niktar\OrderAutomation\Action\ChangeOrderStatus">
+    <type name="Niktar\OrderAutomation\Action\Custom\ChangeOrderStatus">
         <arguments>
             <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
         </arguments>
     </type>
-    <type name="Niktar\OrderAutomation\Action\AddOrderComment">
+    <type name="Niktar\OrderAutomation\Action\Custom\AddOrderComment">
         <arguments>
             <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
         </arguments>
     </type>
-    <type name="Niktar\OrderAutomation\Action\SendEmail">
+    <type name="Niktar\OrderAutomation\Action\Custom\SendEmail">
         <arguments>
             <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
         </arguments>
