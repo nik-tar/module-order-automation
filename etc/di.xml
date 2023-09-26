@@ -93,6 +93,11 @@
             <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
         </arguments>
     </type>
+    <type name="Niktar\OrderAutomation\Model\Rule\Email\Sender">
+        <arguments>
+            <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
+        </arguments>
+    </type>
 
     <type name="Niktar\OrderAutomation\Action\ActionInterface">
         <plugin name="Niktar_OrderAutomation::add_order_comment_after_processing_action"
