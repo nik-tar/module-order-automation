@@ -5,7 +5,12 @@
         <order_automation>
             <general>
                 <enabled>0</enabled>
+                <order_limit_per_run>10</order_limit_per_run>
             </general>
+            <email>
+                <identity>support</identity>
+                <copy_method>bcc</copy_method>
+            </email>
         </order_automation>
     </default>
 </config>

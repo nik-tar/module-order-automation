@@ -1,0 +1,10 @@
+<div class="data-grid-cell-content">
+    <!-- ko foreach: {data: $col.getLabel($row()), as: 'item'} -->
+    <div data-bind="foreach: {data: item.frontend_representation, as: 'frontend_data'}">
+        <div>
+            <span data-bind="text: frontend_data.label" style="font-weight: bold;"></span>:
+            <span data-bind="text: frontend_data.value"></span>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>

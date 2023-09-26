@@ -3,7 +3,7 @@
 namespace Niktar\OrderAutomation\Block\Form\Rule;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
-use Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface;
+use Niktar\OrderAutomation\Api\Data\RuleInterface;
 
 /**
  * Delete entity button.
@@ -28,7 +28,7 @@ class Delete extends GenericButton implements ButtonProviderInterface
                 __('Are you sure you want to delete this rule?'),
                 $this->getUrl(
                     '*/*/delete',
-                    [OrderAutomationRuleInterface::RULE_ID => $this->getRuleId()]
+                    [RuleInterface::RULE_ID => $this->getRuleId()]
                 )
             ),
             [],

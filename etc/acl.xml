@@ -6,7 +6,7 @@
             <resource id="Magento_Backend::admin">
                 <resource id="Niktar_OrderAutomation::general" title="Order Automation" translate="title" sortOrder="10" >
                     <resource id="Niktar_OrderAutomation::rules" title="Rules" translate="title" sortOrder="10" />
-                    <resource id="Niktar_OrderAutomation::log" title="Log" translate="title" sortOrder="20" />
+                    <resource id="Niktar_OrderAutomation::log" title="Action Log" translate="title" sortOrder="20" />
                     <resource id="Niktar_OrderAutomation::config" title="Config" translate="title" sortOrder="30" />
                 </resource>
             </resource>

@@ -31,8 +31,8 @@
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Niktar_Rule::management</aclResource>
-        <dataProvider class="Niktar\Rule\Ui\DataProvider\RuleDataProvider"
+        <aclResource>Niktar_OrderAutomation::rules</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider"
                       name="order_automation_rule_listing_data_source">
             <settings>
                 <requestFieldName>rule_id</requestFieldName>
@@ -55,37 +55,36 @@
                 <sorting>desc</sorting>
             </settings>
         </column>
-        <column name="payment_method">
+        <column name="payment_method" component="Magento_Ui/js/grid/columns/select">
             <settings>
-                <filter>text</filter>
+                <filter>select</filter>
+                <options class="Magento\Payment\Ui\Component\Listing\Column\Method\Options"/>
+                <dataType>select</dataType>
                 <label translate="true">Payment Method</label>
             </settings>
         </column>
-        <column name="apply_id">
-            <settings>
-                <filter>textRange</filter>
-                <label translate="true">Apply Id</label>
-            </settings>
-        </column>
-        <column name="order_status">
+        <column name="apply_in">
             <settings>
                 <filter>text</filter>
+                <label translate="true">Apply In (Hours)</label>
+            </settings>
+        </column>
+        <column name="order_status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <options class="Magento\Sales\Ui\Component\Listing\Column\Status\Options"/>
+                <dataType>select</dataType>
                 <label translate="true">Order Status</label>
             </settings>
         </column>
-        <column name="action_type">
+        <column name="action_data" class="Niktar\OrderAutomation\Ui\Component\Rule\Listing\Column\ActionData">
             <settings>
-                <filter>textRange</filter>
-                <label translate="true">Action Type</label>
-            </settings>
-        </column>
-        <column name="action_data">
-            <settings>
-                <filter>text</filter>
+                <filter>text</filter><!-- TODO: add custom filters -->
                 <label translate="true">Action Data</label>
+                <bodyTmpl>Niktar_OrderAutomation/grid/cells/action_data</bodyTmpl>
             </settings>
         </column>
-        <actionsColumn name="actions" class="Niktar\Rule\Ui\Component\Listing\Column\RuleBlockActions">
+        <actionsColumn name="actions" class="Niktar\OrderAutomation\Ui\Component\Rule\Listing\Column\RuleBlockActions">
             <settings>
                 <indexField>rule_id</indexField>
             </settings>

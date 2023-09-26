@@ -1,10 +1,130 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Niktar\OrderAutomation\Api\Data\OrderAutomationRuleInterface"
-                type="Niktar\OrderAutomation\Model\OrderAutomationRule"/>
-    <preference for="Niktar\OrderAutomation\Api\Data\OrderAutomationRuleSearchResultsInterface"
-                type="Niktar\OrderAutomation\Model\OrderAutomationRuleSearchResults"/>
-    <preference for="Niktar\OrderAutomation\Api\OrderAutomationRuleRepositoryInterface"
-                type="Niktar\OrderAutomation\Model\OrderAutomationRuleRepository"/>
+    <preference for="Niktar\OrderAutomation\Api\Data\RuleInterface"
+                type="Niktar\OrderAutomation\Model\Rule"/>
+    <preference for="Niktar\OrderAutomation\Api\Data\RuleSearchResultsInterface"
+                type="Niktar\OrderAutomation\Model\RuleSearchResults"/>
+    <preference for="Niktar\OrderAutomation\Api\RuleRepositoryInterface"
+                type="Niktar\OrderAutomation\Model\RuleRepository"/>
+
+    <preference for="Niktar\OrderAutomation\Api\Data\ActionDataInterface"
+                type="Niktar\OrderAutomation\Model\Data\ActionData"/>
+
+    <preference for="Niktar\OrderAutomation\Api\Data\ActionLogInterface"
+                type="Niktar\OrderAutomation\Model\ActionLog"/>
+    <preference for="Niktar\OrderAutomation\Api\Data\ActionLogSearchResultsInterface"
+                type="Niktar\OrderAutomation\Model\ActionLogSearchResults"/>
+    <preference for="Niktar\OrderAutomation\Api\ActionLogRepositoryInterface"
+                type="Niktar\OrderAutomation\Model\ActionLogRepository"/>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="order_automation_rule_listing_data_source" xsi:type="string">Niktar\OrderAutomation\Model\ResourceModel\Rule\Grid\Collection</item>
+                <item name="order_automation_log_listing_data_source" xsi:type="string">Niktar\OrderAutomation\Model\ResourceModel\ActionLog\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Niktar\OrderAutomation\Model\ResourceModel\Rule\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">order_automation_rule</argument>
+            <argument name="eventPrefix" xsi:type="string">order_automation_rule_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">rule_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Niktar\OrderAutomation\Model\ResourceModel\Rule</argument>
+        </arguments>
+    </type>
+    <type name="Niktar\OrderAutomation\Model\ResourceModel\ActionLog\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">order_automation_action_log</argument>
+            <argument name="eventPrefix" xsi:type="string">order_automation_action_log_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">action_log_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Niktar\OrderAutomation\Model\ResourceModel\ActionLog</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Niktar\OrderAutomation\Model\LoggerHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/order_automation.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Niktar\OrderAutomation\Model\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Niktar\OrderAutomation\Model\LoggerHandler</item>
+                <item name="info" xsi:type="object">Niktar\OrderAutomation\Model\LoggerHandler</item>
+                <item name="error" xsi:type="object">Niktar\OrderAutomation\Model\LoggerHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Niktar\OrderAutomation\Action\Pool">
+        <arguments>
+            <argument name="actions" xsi:type="array">
+                <item name="send_email" xsi:type="object">Niktar\OrderAutomation\Action\Custom\SendEmail</item>
+                <item name="change_order_status" xsi:type="object">Niktar\OrderAutomation\Action\Custom\ChangeOrderStatus</item>
+                <item name="add_order_comment" xsi:type="object">Niktar\OrderAutomation\Action\Custom\AddOrderComment</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Niktar\OrderAutomation\Action\Resolver">
+        <arguments>
+            <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Niktar\OrderAutomation\Action\Custom\ChangeOrderStatus">
+        <arguments>
+            <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Niktar\OrderAutomation\Action\Custom\AddOrderComment">
+        <arguments>
+            <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Niktar\OrderAutomation\Action\Custom\SendEmail">
+        <arguments>
+            <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Niktar\OrderAutomation\Action\CreateInvoice">
+        <arguments>
+            <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Niktar\OrderAutomation\Model\Rule\Email\Sender">
+        <arguments>
+            <argument name="logger" xsi:type="object">Niktar\OrderAutomation\Model\Logger</argument>
+        </arguments>
+    </type>
+
+    <type name="Niktar\OrderAutomation\Action\ActionInterface">
+        <plugin name="Niktar_OrderAutomation::add_order_comment_after_processing_action"
+                type="Niktar\OrderAutomation\Plugin\AddOrderCommentAfterAction"
+                sortOrder="10"
+        />
+    </type>
+
+    <type name="Niktar\OrderAutomation\Model\RuleRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Niktar\OrderAutomation\Model\Api\SearchCriteria\RuleCollectionProcessor</argument>
+        </arguments>
+    </type>
+    <virtualType name="Niktar\OrderAutomation\Model\Api\SearchCriteria\RuleCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Niktar\OrderAutomation\Model\Api\SearchCriteria\RuleCollectionProcessor\FilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Niktar\OrderAutomation\Model\Api\SearchCriteria\RuleCollectionProcessor\FilterProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor">
+        <arguments>
+            <argument name="customFilters" xsi:type="array">
+                <item name="action_type" xsi:type="object">Niktar\OrderAutomation\Model\Api\SearchCriteria\RuleCollectionProcessor\FilterProcessor\ActionType</item>
+            </argument>
+        </arguments>
+    </virtualType>
 </config>

@@ -10,8 +10,6 @@
                 comment="Hours after which rule is applied"/>
         <column xsi:type="varchar" name="order_status" nullable="false" length="32"
                 comment="Order status code on which rule is applied"/>
-        <column xsi:type="tinyint" name="action_type" unsigned="true" nullable="false" identity="false"
-                comment="Action type"/>
         <column xsi:type="json" name="action_data" nullable="false" comment="Action data"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="rule_id"/>
@@ -25,12 +23,20 @@
         <column xsi:type="int" name="order_id" unsigned="true" nullable="false" identity="false" comment="Order ID"/>
         <column xsi:type="int" name="rule_id" unsigned="true" nullable="false" identity="false" comment="Rule ID"/>
         <column xsi:type="varchar" name="status" nullable="false" length="32" comment="Action result status"/>
-        <column xsi:type="varchar" name="message" nullable="false" length="255" comment="The message in case of error"/>
+        <column xsi:type="text" name="message" nullable="true" comment="The message in case of error"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="Created At"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="action_id"/>
         </constraint>
+        <constraint xsi:type="foreign" referenceId="ORDER_AUTOMATION_ACTION_LOG_RULE_ID_ORDER_AUTOMATION_RULE_RULE_ID"
+                    table="order_automation_action_log" column="rule_id"
+                    referenceTable="order_automation_rule" referenceColumn="rule_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="ORDER_AUTOMATION_ACTION_LOG_ORDER_ID_SALES_ORDER_ENTITY_ID"
+                    table="order_automation_action_log" column="order_id"
+                    referenceTable="sales_order" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
         <index referenceId="ORDER_AUTOMATION_ACTION_LOG_ACTION_ID" indexType="btree">
             <column name="action_id"/>
         </index>
